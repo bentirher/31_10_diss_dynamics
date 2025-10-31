@@ -86,4 +86,5 @@ desktop.ini
 # 🚀 Project-specific ignores
 # (Ignore compiled simulation data, temporary figures, etc.)
 __pycache__/
-*.cpython-*
+*.py[cod]
+*$py.class
