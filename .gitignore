@@ -1,0 +1,89 @@
+# 🐍 Python Bytecode
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*$py.class
+
+# 📓 Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# 🧪 Virtual Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# 📦 Package distributions
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# 🧰 PyInstaller
+#  Usually these files are created after running PyInstaller to bundle an app
+*.manifest
+*.spec
+
+# 🧹 Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# 📄 Logs and Databases
+*.log
+*.sql
+*.sqlite
+*.db
+
+# 🧬 Data / Results (optional)
+# Uncomment the next lines if you generate large simulation data
+# *.pkl
+# *.npy
+# *.npz
+# results/
+# output/
+
+# 🧠 IDE / Editor settings
+.vscode/
+.idea/
+*.swp
+*.swo
+*.bak
+
+# 💻 macOS / Linux / Windows system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 🚀 Project-specific ignores
+# (Ignore compiled simulation data, temporary figures, etc.)
+__pycache__/
+*.cpython-*
