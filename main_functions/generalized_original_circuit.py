@@ -200,7 +200,5 @@ def get_circuit(n:int, omega_m:list, omega_c:list, g:list, gamma:list, kappa:lis
     
     parametrized_qc = trotterized_qc.compose(init, front = True)
 
-    print(omega_eff, g_eff, gamma_eff, gamma_cross, gamma_g_minus, gamma_g_plus, gamma_minus_e, gamma_plus_e)
-
     return parametrized_qc
 
