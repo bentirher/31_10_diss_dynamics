@@ -105,7 +105,10 @@ def get_circuit(n:int, omega_m:list, omega_c:list, g:list, gamma:list, kappa:lis
     gamma_minus_e = [ (gamma_eff[i+1]*(cos_theta[i]**2) + gamma_eff[i]*(sen_theta[i]**2) - 2*gamma_cross[i]*sen_theta[i]*cos_theta[i]) for i in range(n-1) ]
     gamma_plus_e = [ (gamma_eff[i]*(cos_theta[i]**2) + gamma_eff[i+1]*(sen_theta[i]**2) + 2*gamma_cross[i]*sen_theta[i]*cos_theta[i]) for i in range(n-1) ]
 
-
+    print(f"w_eff: {omega_eff}")
+    print(f"g_eff: {g_eff}")
+    print(f"gamma_eff: {gamma_eff}")
+    print(f"gamma_cross: {gamma_cross}")
     # REGISTERS DEFINITION
 
     system = QuantumRegister(n, 'q')
