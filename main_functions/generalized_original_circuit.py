@@ -168,7 +168,7 @@ def get_circuit(n:int, omega_m:list, omega_c:list, g:list, gamma:list, kappa:lis
 
         qc.append(P_dag_gates[j], [system[j], system[j+1]])
         qc.reset([environment[j], environment[j+1]])
-    
+        
     # And onto the second layer
 
     if n > 2:
