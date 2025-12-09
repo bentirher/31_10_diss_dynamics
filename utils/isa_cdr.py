@@ -236,12 +236,13 @@ def train_model(ideal_training_data, noisy_training_data):
     print(f"$R^2$ score: {r2:.4f}")
     return model, delta_a, delta_b, r2
 
-def correct_observable(real_data, model):
+def correct_observable(real_data, model, delta_a, delta_b):
     """
     Corrects the real_data according to a regression model.
     """
     corrected = (real_data - model.intercept_) / model.coef_[0]
-    return corrected
+    error = (1/model.coef_[0])*np.sqrt((corrected**2)*(delta_a**2) + (delta_b**2))
+    return corrected, error
 
 # np.clip(corrected, 0, 1)
 
