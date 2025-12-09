@@ -33,6 +33,65 @@ def get_circuit_properties(qc:QuantumCircuit) -> dict:
 
     return properties
 
+from qiskit.converters import circuit_to_dag
+from qiskit.circuit import ControlFlowOp
+
+def two_qubit_depth(qc):
+    """
+    Compute 'two-qubit depth' of `qc`, recursing into control-flow ops.
+
+    It works by:
+      - Converting to DAGCircuit
+      - Removing all 1-qubit ops (and other <=1-qubit ops like meas/reset)
+      - Using dag.depth(recurse=True), which traverses into IfElse/loops
+        and takes the longer branch for if-else, etc.
+    """
+    dag = circuit_to_dag(qc)
+
+    # Remove all non-control-flow ops that act on <= 1 qubit
+    for node in list(dag.op_nodes()):
+        op = node.op
+        # Keep control-flow ops; DAGCircuit.depth(recurse=True)
+        # will look inside their blocks instead of counting them directly.
+        if isinstance(op, ControlFlowOp):
+            continue
+        if op.num_qubits <= 1:
+            dag.remove_op_node(node)
+
+    # This will now effectively give you the depth in terms of
+    # multi-qubit gates only, recursing into the IfElse / loops.
+    return dag.depth(recurse=True)
+
+from qiskit import QuantumCircuit
+from qiskit.circuit import ControlFlowOp
+
+def count_two_qubit_gates_recursive(qc: QuantumCircuit) -> int:
+    """
+    Count all gates that act on >= 2 qubits in a QuantumCircuit,
+    recursing into control-flow operations (if_else, while, for, etc.).
+
+    Loops are counted once (i.e. we count the gates in the body once,
+    not multiplied by the number of iterations).
+    """
+
+    total = 0
+
+    for instr in qc.data:
+        op = instr.operation
+
+        # If it's a control-flow op (IfElseOp, ForLoopOp, WhileLoopOp...)
+        if isinstance(op, ControlFlowOp):
+            # Recurse into each block circuit
+            for block in op.blocks:
+                total += count_two_qubit_gates_recursive(block)
+
+        else:
+            # Regular operation: count if it touches >= 2 qubits
+            if op.num_qubits >= 2:
+                total += 1
+
+    return total
+
 def count_swap(qc:QuantumCircuit) -> int:
 
     """
